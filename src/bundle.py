@@ -6,15 +6,15 @@ def process(filename):
 
   files = ''
 
-  for filey in ['config', 'phontab', 'phonindex', 'phondata', 'intonations', 'en_dict']: # fr_dict # Needed for French
-    f = Popen(['python', '/home/alon/Dev/emscripten/tools/file2json.py', os.path.join(base_dir, 'espeak-data', filey), filey], stdout=PIPE).communicate()
+  for filey in ['config', 'phontab', 'phonindex', 'phondata', 'intonations', 'en_dict', 'de_dict']: # fr_dict # Needed for French
+    f = Popen(['python', '/home/eran/projects/emsdk/emscripten/1.38.14/tools/file2json.py', os.path.join(base_dir, 'espeak-data', filey), filey], stdout=PIPE).communicate()
     files += f[0]
 
-  f = Popen(['python', '/home/alon/Dev/emscripten/tools/file2json.py', os.path.join(base_dir, 'espeak-data/voices/en/en-us'), 'en_us'], stdout=PIPE).communicate()
+  f = Popen(['python', '/home/eran/projects/emsdk/emscripten/1.38.14/tools/file2json.py', os.path.join(base_dir, 'espeak-data/voices/en/en-us'), 'en_us'], stdout=PIPE).communicate()
   files += f[0]
 
   # Needed for French
-  f = Popen(['python', '/home/alon/Dev/emscripten/tools/file2json.py', os.path.join(base_dir, 'espeak-data/voices/fr'), 'fr'], stdout=PIPE).communicate()
+  f = Popen(['python', '/home/eran/projects/emsdk/emscripten/1.38.14/tools/file2json.py', os.path.join(base_dir, 'espeak-data/voices/de'), 'de'], stdout=PIPE).communicate()
   files += f[0]
 
   src = open(filename).read()

@@ -2,13 +2,14 @@
 # available at https://github.com/kripken/emscripten
 # (change the paths here to match where you set that up in your system).
 
-export EMSCRIPTEN=/home/alon/Dev/emscripten
+export EMSCRIPTEN=/home/eran/projects/emsdk/emscripten/1.38.14/
 
 echo "make"
 make distclean
 make clean
 rm libespeak.*
 rm speak speak.bc speak.o
+# CXXFLAGS="-DNEED_WCHAR_FUNCTIONS" emmake make -j 2 spea
 CXXFLAGS="-DNEED_WCHAR_FUNCTIONS" $EMSCRIPTEN/emmake make -j 2 speak
 mv speak speak.bc
 
@@ -19,6 +20,7 @@ mv speak speak.bc
 #python ~/Dev/emscripten/tools/autodebugger.py speak.orig.ll speak.ll
 
 echo "emscripten"
+# emcc -O2 --js-transform "python bundle.py" speak.bc -o speak.raw.js
 $EMSCRIPTEN/emcc -O2 --js-transform "python bundle.py" speak.bc -o speak.raw.js
 cat shell_pre.js > ../speakGenerator.js
 cat speak.raw.js >> ../speakGenerator.js
